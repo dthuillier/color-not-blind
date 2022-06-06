@@ -29,11 +29,6 @@ def main():
     color_choice = st.sidebar.radio('Choose the color function :',
                                     color_function)
 
-    # Idea to get input image from user
-    #picture = st.camera_input("Take a picture")
-    #if picture:
-    #    st.image(picture)
-
     # File Uploader
     image_file = st.file_uploader("Please upload an image file",
                                   type=["jpg", "png", "jpeg"])
@@ -58,11 +53,11 @@ def main():
             color = get_hue(image_file.name)
 
         # Print prediction and color
-        string = "This item is most likely a " + color + " " + prediction
-        st.header(string)
+        sentence = "This item is most likely a " + color + " " + prediction
+        st.header(sentence)
 
         # Text to speech
-        tts = gTTS(string)
+        tts = gTTS(sentence)
         tts.save("descr.mp3")
         audio_file = open("descr.mp3", "rb")
         audio_bytes = audio_file.read()
@@ -150,10 +145,10 @@ def convert_rgb_to_names(rgb_tuple):
     Argument :
         RGB color as a tuple
     Returns :
-        String of Hexadecimal name
+        string of Hexadecimal name
     '''
 
-    # a dictionary of all the hex and their respective names in css3
+    # Dictionary of all the hex and their respective names in css3
     css3_db = webcolors.CSS3_NAMES_TO_HEX
     names = []
     rgb_values = []
@@ -174,7 +169,7 @@ def get_hue(image):
     Argument :
         image (path)
     Returns :
-        String name of the hue
+        string name of the hue
     '''
 
     # Load image
